@@ -18,8 +18,8 @@ module ClientSideValidations
           sql << 'BINARY' if t.engine.connection.adapter_name =~ /^mysql/i
           sql << t[attribute].eq(value).to_sql
         else
-          escaped_value = value.gsub(/[%_]/, '\\\\\0')
-          sql << "#{t[attribute].matches(escaped_value).to_sql} ESCAPE '\\'"
+          #escaped_value = value.gsub(/[%_]/, '\\\\\0')
+          sql << "#{t[attribute].matches(value).to_sql}"
         end
 
         sql << "AND #{t[klass.primary_key].not_eq(params[:id]).to_sql}" if params[:id]
